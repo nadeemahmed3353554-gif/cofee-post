@@ -1,0 +1,571 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velvet Brew Coffee</title>
+    <link rel="stylesheet" href="../css/coconut.css">
+</head>
+<style>
+
+    
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #120b08;
+    font-family: "Poppins", Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* MAIN POSTER */
+.coffee-poster {
+    position: relative;
+    width: 520px;
+    height: 680px;
+    overflow: hidden;
+    border-radius: 28px;
+    background:
+        radial-gradient(circle at 50% 42%, #6e3b1f 0%, #35190e 35%, #160b07 75%);
+    border: 1px solid rgba(218, 163, 91, 0.45);
+    box-shadow:
+        0 0 25px rgba(190, 122, 48, 0.25),
+        0 0 70px rgba(153, 83, 27, 0.18);
+}
+
+/* BACKGROUND GLOW */
+.glow-circle {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: 120px;
+    left: 110px;
+    border-radius: 50%;
+    background: rgba(210, 137, 65, 0.12);
+    filter: blur(45px);
+    animation: backgroundGlow 4s ease-in-out infinite alternate;
+}
+
+.circle-2 {
+    width: 180px;
+    height: 180px;
+    top: 390px;
+    left: 330px;
+    background: rgba(255, 188, 92, 0.09);
+    animation-delay: 1s;
+}
+
+/* CONTENT */
+.content {
+    position: relative;
+    z-index: 5;
+    height: 100%;
+    text-align: center;
+    padding-top: 55px;
+}
+
+/* SMALL TITLE */
+.small-title {
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: #d9a15b;
+    opacity: 0;
+    animation: fadeDown 1s ease forwards;
+}
+
+/* MAIN TITLE */
+h1 {
+    margin-top: 8px;
+    font-size: 58px;
+    line-height: 1;
+    letter-spacing: 2px;
+    color: #fff4df;
+    text-shadow:
+        0 0 8px rgba(255, 221, 168, 0.4),
+        0 0 25px rgba(197, 130, 53, 0.35);
+    opacity: 0;
+    animation: titleAppear 1.2s ease 0.3s forwards;
+}
+
+h1 span {
+    display: block;
+    color: #d89a50;
+    font-size: 63px;
+    text-shadow:
+        0 0 8px #d89a50,
+        0 0 22px rgba(216, 154, 80, 0.7);
+}
+
+.tagline {
+    margin-top: 13px;
+    color: #ead8c0;
+    font-size: 13px;
+    letter-spacing: 1px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.7s forwards;
+}
+
+/* COFFEE AREA */
+.coffee-area {
+    position: relative;
+    width: 300px;
+    height: 270px;
+    margin: 5px auto 0;
+}
+
+/* SAUCER */
+.saucer {
+    position: absolute;
+    width: 245px;
+    height: 38px;
+    left: 28px;
+    bottom: 22px;
+    border-radius: 50%;
+    background: linear-gradient(
+        to bottom,
+        #e8c99c,
+        #9c6234
+    );
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.6),
+        0 0 15px rgba(218, 158, 86, 0.3);
+    animation: cupEntrance 1.2s ease 0.8s both;
+}
+
+/* CUP */
+.cup {
+    position: absolute;
+    width: 190px;
+    height: 145px;
+    left: 55px;
+    bottom: 45px;
+    border-radius: 15px 15px 55px 55px;
+    background:
+        linear-gradient(
+            90deg,
+            #7b431f,
+            #d28b48 35%,
+            #8b4a22 65%,
+            #54250f
+        );
+    box-shadow:
+        inset 8px 0 12px rgba(255, 214, 153, 0.2),
+        inset -10px 0 15px rgba(0, 0, 0, 0.3),
+        0 18px 30px rgba(0, 0, 0, 0.55);
+    z-index: 3;
+    animation: cupEntrance 1.2s cubic-bezier(.2,.8,.2,1) 0.8s both;
+}
+
+/* COFFEE TOP */
+.coffee {
+    position: absolute;
+    width: 177px;
+    height: 38px;
+    top: -8px;
+    left: 6px;
+    border-radius: 50%;
+    background:
+        radial-gradient(
+            ellipse at center,
+            #6b3014 0%,
+            #351305 65%,
+            #1b0803 100%
+        );
+    border: 4px solid #b56c32;
+    box-shadow:
+        0 0 10px rgba(61, 22, 7, 0.9);
+}
+
+/* CUP SHINE */
+.cup-shine {
+    position: absolute;
+    width: 20px;
+    height: 95px;
+    left: 35px;
+    top: 25px;
+    border-radius: 50%;
+    background: rgba(255, 235, 204, 0.15);
+    transform: rotate(10deg);
+    filter: blur(2px);
+    animation: shineMove 3s ease-in-out infinite;
+}
+
+/* HANDLE */
+.handle {
+    position: absolute;
+    width: 72px;
+    height: 85px;
+    right: 24px;
+    bottom: 78px;
+    border: 16px solid #a85f2c;
+    border-left: 0;
+    border-radius: 0 50px 50px 0;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.4);
+    z-index: 2;
+    animation: cupEntrance 1.2s ease 0.9s both;
+}
+
+/* STEAM */
+.steam {
+    position: absolute;
+    bottom: 175px;
+    width: 18px;
+    height: 75px;
+    border-radius: 50%;
+    border-left: 3px solid rgba(255, 237, 212, 0.7);
+    filter: blur(1px);
+    opacity: 0;
+    z-index: 6;
+}
+
+.steam-1 {
+    left: 105px;
+    animation: steamMove 3s ease-in-out 1.5s infinite;
+}
+
+.steam-2 {
+    left: 145px;
+    height: 90px;
+    animation: steamMove 3.4s ease-in-out 1.8s infinite;
+}
+
+.steam-3 {
+    left: 185px;
+    height: 70px;
+    animation: steamMove 2.8s ease-in-out 2s infinite;
+}
+
+/* INFO */
+.coffee-info {
+    position: absolute;
+    bottom: 92px;
+    left: 45px;
+    right: 45px;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgba(224, 173, 104, 0.25);
+    border-bottom: 1px solid rgba(224, 173, 104, 0.25);
+    padding: 12px 0;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.5s forwards;
+}
+
+.coffee-info div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.coffee-info strong {
+    color: #e5ad67;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.coffee-info small {
+    color: #bba58b;
+    font-size: 8px;
+    letter-spacing: 2px;
+}
+
+/* BUTTON */
+.order-btn {
+    position: absolute;
+    bottom: 42px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 190px;
+    height: 38px;
+    border: 1px solid #d89a50;
+    border-radius: 30px;
+    background: rgba(216, 154, 80, 0.08);
+    color: #f4d5aa;
+    font-size: 10px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: 0.4s ease;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.8s forwards;
+}
+
+.order-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 220, 164, 0.3),
+        transparent
+    );
+    transition: 0.6s;
+}
+
+.order-btn:hover {
+    transform: translateX(-50%) scale(1.06);
+    background: rgba(216, 154, 80, 0.18);
+    box-shadow:
+        0 0 12px rgba(216, 154, 80, 0.5),
+        0 0 30px rgba(216, 154, 80, 0.2);
+}
+
+.order-btn:hover::before {
+    left: 100%;
+}
+
+/* CREDIT */
+.made {
+    position: absolute;
+    bottom: 14px;
+    left: 0;
+    width: 100%;
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: #a8896b;
+    opacity: 0;
+    animation: fadeUp 1s ease 2s forwards;
+}
+
+/* ANIMATIONS */
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes titleAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+        filter: blur(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes cupEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(80px) scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes steamMove {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) translateX(0) scale(0.7) rotate(-8deg);
+    }
+
+    30% {
+        opacity: 0.8;
+    }
+
+    60% {
+        opacity: 0.5;
+        transform: translateY(-30px) translateX(12px) scale(1) rotate(8deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-85px) translateX(-12px) scale(1.2) rotate(-10deg);
+    }
+}
+
+@keyframes shineMove {
+    0%, 100% {
+        opacity: 0.1;
+        transform: translateX(0) rotate(10deg);
+    }
+
+    50% {
+        opacity: 0.4;
+        transform: translateX(25px) rotate(10deg);
+    }
+}
+
+@keyframes backgroundGlow {
+    from {
+        transform: scale(0.9);
+        opacity: 0.5;
+    }
+
+    to {
+        transform: scale(1.15);
+        opacity: 1;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+
+    .coffee-poster {
+        width: 92vw;
+        height: 650px;
+    }
+
+    h1 {
+        font-size: 48px;
+    }
+
+    h1 span {
+        font-size: 53px;
+    }
+}
+
+</style>
+<body>
+
+    <div class="coffee-poster">
+
+        <div class="glow-circle"></div>
+        <div class="glow-circle circle-2"></div>
+
+        <div class="content">
+
+            <p class="small-title">PREMIUM COFFEE</p>
+
+            <h1>
+                Velvet <span>Brew</span>
+            </h1>
+
+            <p class="tagline">
+                A warm moment in every sip
+            </p>
+
+            <div class="coffee-area">
+
+                <div class="steam steam-1"></div>
+                <div class="steam steam-2"></div>
+                <div class="steam steam-3"></div>
+
+                <div class="cup">
+                    <div class="coffee"></div>
+                    <div class="cup-shine"></div>
+                </div>
+
+                <div class="handle"></div>
+
+                <div class="saucer"></div>
+
+            </div>
+
+            <div class="coffee-info">
+                <div>
+                    <strong>100%</strong>
+                    <small>ARABICA</small>
+                </div>
+
+                <div>
+                    <strong>RICH</strong>
+                    <small>FLAVOR</small>
+                </div>
+
+                <div>
+                    <strong>FRESH</strong>
+                    <small>ROASTED</small>
+                </div>
+            </div>
+
+            <button class="order-btn">
+                <span>ENJOY YOUR COFFEE</span>
+            </button>
+
+            <p class="made">
+                Made with love • Ateequa
+            </p>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const button = document.querySelector(".order-btn");
+const poster = document.querySelector(".coffee-poster");
+const cup = document.querySelector(".cup");
+const handle = document.querySelector(".handle");
+
+// Button click animation
+button.addEventListener("click", () => {
+
+    // Cup ko thora bounce karwana
+    cup.classList.remove("cup-bounce");
+    handle.classList.remove("handle-bounce");
+
+    void cup.offsetWidth;
+
+    cup.classList.add("cup-bounce");
+    handle.classList.add("handle-bounce");
+
+    // Poster glow
+    poster.classList.add("active-glow");
+
+    setTimeout(() => {
+        poster.classList.remove("active-glow");
+    }, 1200);
+});
+
+
+// Extra steam create karna
+function createSteam() {
+
+    const steam = document.createElement("div");
+
+    steam.classList.add("extra-steam");
+
+    steam.style.left = (120 + Math.random() * 70) + "px";
+    steam.style.animationDuration = (2.5 + Math.random() * 1.5) + "s";
+
+    document.querySelector(".coffee-area").appendChild(steam);
+
+    setTimeout(() => {
+        steam.remove();
+    }, 4000);
+}
+
+// Har thori der baad new steam
+setInterval(createSteam, 1800);
+    </script>
+</body>
+</html>
+```
